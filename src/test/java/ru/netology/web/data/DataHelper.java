@@ -1,52 +1,45 @@
 package ru.netology.web.data;
 
-import lombok.AllArgsConstructor;
 import lombok.Value;
-import ru.netology.web.data.page.TransferPage;
 
 public class DataHelper {
-    private DataHelper(){
+    private DataHelper() {
     }
 
     @Value
-    public static class AuthInfo{
-        String login;
-        String password;
+    public static class AuthInfo {
+        private String login;
+        private String password;
     }
 
-    public static AuthInfo getAuthInfo(){
+    public static AuthInfo getAuthInfo() {
         return new AuthInfo("vasya", "qwerty123");
+    }
+
+    public static AuthInfo getOtherAuthInfo(AuthInfo original) {
+        return new AuthInfo("petya", "123qwerty");
     }
 
     @Value
     public static class VerificationCode {
-        String code;
+        private String code;
     }
 
-    public static VerificationCode getVerificationCodeFor(){
+    public static VerificationCode getVerificationCodeFor(AuthInfo authInfo) {
         return new VerificationCode("12345");
     }
+
     @Value
-    @AllArgsConstructor
-    public static class TransferInfo{
-        String card;
+    public static class CardData {
+        private String number;
     }
-    public static TransferInfo getFirstCardNumber(){
-        return new TransferInfo("5559000000000001");
+
+    public static CardData getFirstCardNumber() {
+        return new CardData("5559 0000 0000 0001");
     }
-    public static TransferInfo getSecondCardNumber(){
-        return new TransferInfo("5559000000000002");
+
+    public static CardData getSecondCardNumber() {
+        return new CardData("5559 0000 0000 0002");
     }
-    public static TransferInfo getEmptyCardNumber(){
-        return new TransferInfo("");
-    }
-    public static TransferInfo getIrrelevantCardNumber(){
-        return new TransferInfo("5559000000002222");
-    }
-    public static int getExpectedBalanceIfBalanceIncreased(int balance, int amount){
-        return balance + amount;
-    }
-    public static int getExpectedBalanceIfBalanceDecreased (int balance, int amount){
-        return balance - amount;
-    }
+
 }
